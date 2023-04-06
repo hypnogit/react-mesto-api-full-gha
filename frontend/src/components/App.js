@@ -48,11 +48,12 @@ function App() {
       })
       .catch((error) => {
         console.log(error);
-    })
+      })
     }
   },);
 
   useEffect(() => {
+    console.log(loggedIn);
     if (loggedIn) {
       api
         .getInitialCards()
