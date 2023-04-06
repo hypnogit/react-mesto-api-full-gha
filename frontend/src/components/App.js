@@ -35,8 +35,8 @@ function App() {
 
   const [isFail, setIsFail] = useState(false);
 
-  const tokenCheck = function () {
-    console.log('tratata');
+
+  useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
       checkTokenValidity(token)
@@ -49,11 +49,7 @@ function App() {
         console.log(error);
     })
     }
-  }
-  
-  useEffect(() => {
-    tokenCheck();
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     if (loggedIn) {
