@@ -6,6 +6,8 @@ const { Conflict } = require('../utils/Conflict');
 const { NotFound } = require('../utils/NotFound');
 const { Unauthorized } = require('../utils/Unauthorized');
 
+const { JWT_SECRET, NODE_ENV } = process.env;
+
 module.exports.getUsers = (req, res, next) => {
   User.find({})
     .then((users) => res.send(users))
@@ -105,13 +107,9 @@ module.exports.login = (req, res, next) => {
           }
           const token = jsonwebtoken.sign({
             _id: user._id,
-          }, 'some-secret-key', { expiresIn: '7d' });
-          res.cookie('jwt', token, {
-            maxAge: 604800000,
-            httpOnly: true,
-          });
+          }, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key', { expiresIn: '7d' });
           return res.send({
-            name: user.name, about: user.about, avatar: user.avatar, email: user.email,
+            name: user.name, about: user.about, avatar: user.avatar, email: user.email, token,
           });
         })
         .catch((error) => {

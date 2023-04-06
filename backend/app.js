@@ -10,8 +10,15 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT = 3000 } = process.env;
 const app = express();
 
+require('dotenv').config();
+
 app.use(cors({ origin: 'https://hypnogit.nomoredomains.monster' }));
 app.use(requestLogger);
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 app.use(express.json());
 app.use(userRouter);
 app.use(cardRouter);
