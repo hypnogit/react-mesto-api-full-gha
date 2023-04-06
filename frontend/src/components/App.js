@@ -37,19 +37,26 @@ function App() {
 
 
   useEffect(() => {
+    tokenCheck();
+  }, );
+
+  useEffect(() => {
     api
       .getInitialCards()
       .then((initialCards) => {
         setCards(initialCards);
       })
       .catch();
+    
+  }, [loggedIn]);
+
+  useEffect(() => {
     api
       .getUserInfo()
       .then((userInfo) => {
         setCurrentUser(userInfo);
       })
       .catch();
-    tokenCheck();
   }, [loggedIn]);
 
 
