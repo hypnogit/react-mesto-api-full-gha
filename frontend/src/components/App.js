@@ -41,22 +41,25 @@ function App() {
   }, );
 
   useEffect(() => {
-    api
-      .getInitialCards()
-      .then((initialCards) => {
-        setCards(initialCards);
-      })
-      .catch();
-    
+    if (loggedIn) {
+      api
+        .getInitialCards()
+        .then((initialCards) => {
+          setCards(initialCards);
+        })
+        .catch();
+    }
   }, [loggedIn]);
 
   useEffect(() => {
-    api
-      .getUserInfo()
-      .then((userInfo) => {
-        setCurrentUser(userInfo);
-      })
-      .catch();
+    if (loggedIn) {
+      api
+        .getUserInfo()
+        .then((userInfo) => {
+          setCurrentUser(userInfo);
+        })
+        .catch();
+    }
   }, [loggedIn]);
 
 
