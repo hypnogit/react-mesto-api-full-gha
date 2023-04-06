@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
+const cors = require('cors');
 const { cardRouter } = require('./routes/cards');
 const { userRouter } = require('./routes/users');
 const { NotFound } = require('./utils/NotFound');
@@ -9,6 +10,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT = 3000 } = process.env;
 const app = express();
 
+app.use(cors({ origin: 'https://hypnogit.nomoredomains.monster' }));
 app.use(requestLogger);
 app.use(express.json());
 app.use(userRouter);
