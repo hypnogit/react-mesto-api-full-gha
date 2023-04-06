@@ -50,7 +50,7 @@ function App() {
         console.log(error);
     })
     }
-  }, [loggedIn]);
+  },);
 
   useEffect(() => {
     if (loggedIn) {
