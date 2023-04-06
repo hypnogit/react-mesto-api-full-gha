@@ -35,7 +35,22 @@ function App() {
 
   const [isFail, setIsFail] = useState(false);
 
-
+  const tokenCheck = function () {
+    console.log('tratata');
+    const token = localStorage.getItem('token');
+    if (token) {
+      checkTokenValidity(token)
+      .then((res) => {
+        setLoggedIn(true);
+        setEmail(res.data.email);
+        navigate('/');
+      })
+      .catch((error) => {
+        console.log(error);
+    })
+    }
+  }
+  
   useEffect(() => {
     tokenCheck();
   }, []);
@@ -168,22 +183,6 @@ function App() {
   const handleLogout = function () {
     localStorage.removeItem('token');
     setLoggedIn(false);
-  }
-
-  const tokenCheck = function () {
-    console.log('tratata');
-    const token = localStorage.getItem('token');
-    if (token) {
-      checkTokenValidity(token)
-      .then((res) => {
-        setLoggedIn(true);
-        setEmail(res.data.email);
-        navigate('/');
-      })
-      .catch((error) => {
-        console.log(error);
-    })
-    }
   }
 
   return (
