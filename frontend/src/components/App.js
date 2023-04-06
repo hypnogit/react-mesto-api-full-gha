@@ -50,7 +50,7 @@ function App() {
         console.log(error);
       })
     }
-  },);
+  }, []);
 
   useEffect(() => {
     console.log(loggedIn);
@@ -62,7 +62,7 @@ function App() {
         })
         .catch();
     }
-  }, [loggedIn]);
+  }, []);
 
   useEffect(() => {
     if (loggedIn) {
@@ -73,7 +73,7 @@ function App() {
         })
         .catch();
     }
-  }, [loggedIn]);
+  }, []);
 
 
   function handleCardLike(card) {
