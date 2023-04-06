@@ -2,8 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
-const cors = require('./middlewares/cors');
 const corsLib = require('cors');
+const cors = require('./middlewares/cors');
 const { cardRouter } = require('./routes/cards');
 const { userRouter } = require('./routes/users');
 const { NotFound } = require('./utils/NotFound');
@@ -13,7 +13,7 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 app.use(cors);
-app.use(corsLib);
+app.use(corsLib({ origin: 'https://hypnogit.nomoredomains.monster/' }));
 app.use(requestLogger);
 app.get('/crash-test', () => {
   setTimeout(() => {
