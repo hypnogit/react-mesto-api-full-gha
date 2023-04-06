@@ -1,0 +1,26 @@
+.register__input {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #CCCCCC;
+    margin: 0 0 30px 0;
+    padding: 0;
+    border: 0;
+    border-bottom: 2px solid #CCCCCC;
+    width: 358px;
+    height: 27px;
+    background-color: black;
+  }
+  
+  @media screen and (max-width: 550px) {
+    .register__input {
+      width: 238px;
+    }
+  
+    .register__input:nth-of-type(2) {
+      margin-bottom: 0;
+    }
+  }
+  
