@@ -38,7 +38,7 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
-  }, );
+  }, []);
 
   useEffect(() => {
     if (loggedIn) {
@@ -171,6 +171,7 @@ function App() {
   }
 
   const tokenCheck = function () {
+    console.log('tratata');
     const token = localStorage.getItem('token');
     if (token) {
       checkTokenValidity(token)
