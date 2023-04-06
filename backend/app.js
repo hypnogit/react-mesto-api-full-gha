@@ -1,7 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cors = require('./middlewares/cors');
+const corsLib = require('cors');
 const { cardRouter } = require('./routes/cards');
 const { userRouter } = require('./routes/users');
 const { NotFound } = require('./utils/NotFound');
@@ -10,9 +12,8 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT = 3000 } = process.env;
 const app = express();
 
-require('dotenv').config();
-
 app.use(cors);
+app.use(corsLib);
 app.use(requestLogger);
 app.get('/crash-test', () => {
   setTimeout(() => {
