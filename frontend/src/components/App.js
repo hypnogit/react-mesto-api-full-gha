@@ -43,7 +43,7 @@ function App() {
         setCards(initialCards);
       })
       .catch();
-  }, []);
+  }, [loggedIn]);
 
   useEffect(() => {
     api
@@ -52,7 +52,7 @@ function App() {
         setCurrentUser(userInfo);
       })
       .catch();
-  }, []);
+  }, [loggedIn]);
 
   useEffect(() => {
     tokenCheck();
