@@ -43,20 +43,14 @@ function App() {
         setCards(initialCards);
       })
       .catch();
-  }, [loggedIn]);
-
-  useEffect(() => {
     api
       .getUserInfo()
       .then((userInfo) => {
         setCurrentUser(userInfo);
       })
       .catch();
-  }, [loggedIn]);
-
-  useEffect(() => {
     tokenCheck();
-  }, []);
+  }, [loggedIn]);
 
 
   function handleCardLike(card) {
