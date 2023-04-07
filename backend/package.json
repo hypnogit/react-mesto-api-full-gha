@@ -35,6 +35,5 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/hypnogit/express-mesto-gha/issues"
-  },
-  "homepage": "https://github.com/hypnogit/express-mesto-gha#readme"
+  }
 }
