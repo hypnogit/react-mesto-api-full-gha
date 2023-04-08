@@ -98,6 +98,10 @@ class Api {
     })
     .then(this._checkResponse)
   }
+
+  setToken(token) {
+    this._headers = { ...this._headers, "Authorization": `Bearer ${token}` }
+  }
 }
 
 const api = new Api(apiConfig);

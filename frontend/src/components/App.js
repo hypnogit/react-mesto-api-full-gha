@@ -38,6 +38,8 @@ function App() {
   
   useEffect(() => {
     const token = localStorage.getItem('token');
+    api
+      .setToken(token);
     if (token) {
       checkTokenValidity(token)
         .then((res) => {
