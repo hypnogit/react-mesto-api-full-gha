@@ -39,30 +39,26 @@ function App() {
     const token = localStorage.getItem('token');
     if (token) {
       checkTokenValidity(token)
-      .then((res) => {
-        setLoggedIn(true);
-        setEmail(res.email);
-        navigate('/');
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-    }
-    if (loggedIn) {
+        .then((res) => {
+          setLoggedIn(true);
+          setEmail(res.email);
+          navigate('/');
+        })
+        .catch();
       api
         .getInitialCards()
-        .then((initialCards) => {
-          setCards(initialCards);
-        })
-        .catch();
+          .then((initialCards) => {
+            setCards(initialCards);
+          })
+          .catch();
       api
         .getUserInfo()
-        .then((userInfo) => {
-          setCurrentUser(userInfo);
-        })
-        .catch();
+          .then((userInfo) => {
+            setCurrentUser(userInfo);
+          })
+          .catch();
     }
-  }, [loggedIn]);
+  }, [loggedIn, navigate]);
   /*
   useEffect(() => {
     const token = localStorage.getItem('token');
