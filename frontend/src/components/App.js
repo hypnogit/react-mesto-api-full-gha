@@ -41,11 +41,11 @@ function App() {
     api
       .setToken(token);
     if (token) {
-      checkTokenValidity(token)
+      api.getUserInfo()
         .then((res) => {
-          setLoggedIn(true);
           setEmail(res.email);
           setCurrentUser(res);
+          setLoggedIn(true);
           navigate('/');
         })
         .catch();
@@ -61,12 +61,6 @@ function App() {
       .getInitialCards()
         .then((initialCards) => {
           setCards(initialCards);
-        })
-        .catch();
-    api
-      .getUserInfo()
-        .then((userInfo) => {
-          setCurrentUser(userInfo);
         })
         .catch();
   }, [loggedIn])
