@@ -35,7 +35,35 @@ function App() {
 
   const [isFail, setIsFail] = useState(false);
 
-
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      checkTokenValidity(token)
+      .then((res) => {
+        setLoggedIn(true);
+        setEmail(res.email);
+        navigate('/');
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    }
+    if (loggedIn) {
+      api
+        .getInitialCards()
+        .then((initialCards) => {
+          setCards(initialCards);
+        })
+        .catch();
+      api
+        .getUserInfo()
+        .then((userInfo) => {
+          setCurrentUser(userInfo);
+        })
+        .catch();
+    }
+  }, [loggedIn]);
+  /*
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -67,6 +95,7 @@ function App() {
         .catch();
     }
   }, [loggedIn]);
+  /*
 
   /*
   useEffect(() => {
