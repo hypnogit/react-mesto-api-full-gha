@@ -5,7 +5,6 @@ const { JWT_SECRET, NODE_ENV } = process.env;
 
 module.exports.auth = (req, res, next) => {
   const { authorization } = req.headers;
-  console.log(req.headers);
   if (!authorization) {
     return next(new Unauthorized('Ошибка авторизации'));
   }

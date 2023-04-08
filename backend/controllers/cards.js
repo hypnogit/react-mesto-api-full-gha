@@ -17,7 +17,7 @@ module.exports.deleteCard = (req, res, next) => {
     })
     .then((card) => {
       if (card.owner.toString() === req.user._id) {
-        Card.deleteOne(req.params.cardId)
+        Card.deleteOne({ _id: req.params.cardId })
           .then(() => res.send({ message: 'Карточка удалена' }))
           .catch((error) => {
             next(error);

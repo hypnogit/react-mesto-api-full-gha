@@ -38,22 +38,20 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    console.log(token);
     if (token) {
       checkTokenValidity(token)
       .then((res) => {
         setLoggedIn(true);
-        setEmail(res.data.email);
+        setEmail(res.email);
         navigate('/');
       })
       .catch((error) => {
         console.log(error);
       })
     }
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
-    console.log(loggedIn);
     if (loggedIn) {
       api
         .getInitialCards()
@@ -61,9 +59,16 @@ function App() {
           setCards(initialCards);
         })
         .catch();
+      api
+        .getUserInfo()
+        .then((userInfo) => {
+          setCurrentUser(userInfo);
+        })
+        .catch();
     }
-  }, []);
+  }, [loggedIn]);
 
+  /*
   useEffect(() => {
     if (loggedIn) {
       api
@@ -73,7 +78,8 @@ function App() {
         })
         .catch();
     }
-  }, []);
+  }, [loggedIn]);
+  */
 
 
   function handleCardLike(card) {

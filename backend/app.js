@@ -3,7 +3,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const corsLib = require('cors');
-//const cors = require('./middlewares/cors');
 const { cardRouter } = require('./routes/cards');
 const { userRouter } = require('./routes/users');
 const { NotFound } = require('./utils/NotFound');
@@ -12,7 +11,6 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT = 3000 } = process.env;
 const app = express();
 
-//app.use(cors);
 app.use(corsLib());
 app.use(requestLogger);
 app.get('/crash-test', () => {
@@ -23,12 +21,11 @@ app.get('/crash-test', () => {
 app.use(express.json());
 app.use(userRouter);
 app.use(cardRouter);
-app.use(errorLogger);
 
 app.use((req, res, next) => {
   next(new NotFound('Запрашиваемая страница не найдена'));
 });
-
+app.use(errorLogger);
 app.use(errors());
 
 app.use((error, req, res, next) => {

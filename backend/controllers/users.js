@@ -54,12 +54,13 @@ module.exports.createUser = (req, res, next) => {
             next(error);
           }
         });
-    });
+    })
+    .catch(next);
 };
 
 module.exports.updateProfile = (req, res, next) => {
-  const { name, about, avatar } = req.body;
-  User.findByIdAndUpdate(req.user._id, { name, about, avatar }, { new: true, runValidators: true })
+  const { name, about } = req.body;
+  User.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
     .orFail(() => {
       next(new NotFound('Запрашиваемый пользователь не найден'));
     })
@@ -115,7 +116,8 @@ module.exports.login = (req, res, next) => {
         .catch((error) => {
           next(error);
         });
-    });
+    })
+    .catch(next);
 };
 
 module.exports.getUserInfo = (req, res, next) => {
