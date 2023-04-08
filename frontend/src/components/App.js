@@ -223,6 +223,7 @@ function App() {
         localStorage.setItem('token', data.token);
         setIsFail(false);
         setLoggedIn(true);
+        api.setToken(data.token);
         setEmail(email);
         navigate('/');
       }
