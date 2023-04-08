@@ -55,13 +55,11 @@ function App() {
       api
         .getUserInfo()
           .then((userInfo) => {
-            console.log(userInfo);
             setCurrentUser(userInfo);
           })
           .catch();
     }
   }, [loggedIn, navigate]);
-  console.log(currentUser);
   /*
   useEffect(() => {
     const token = localStorage.getItem('token');
