@@ -1,7 +1,7 @@
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import ImagePopup from "./ImagePopup";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { api } from "../utils/Api";
@@ -36,6 +36,42 @@ function App() {
   const [isFail, setIsFail] = useState(false);
 
   
+  const checkToken = useCallback(() => {
+    const token = localStorage.getItem('token');
+    api
+      .setToken(token);
+    if (token) {
+      checkTokenValidity(token)
+        .then((res) => {
+          setLoggedIn(true);
+          setEmail(res.email);
+          setCurrentUser(res);
+          navigate('/');
+        })
+        .catch();
+      }
+  }, [navigate]);
+
+  useEffect(() => {
+    checkToken();
+  }, []);
+
+  useEffect(() => {
+    api
+      .getInitialCards()
+        .then((initialCards) => {
+          setCards(initialCards);
+        })
+        .catch();
+    api
+      .getUserInfo()
+        .then((userInfo) => {
+          setCurrentUser(userInfo);
+        })
+        .catch();
+  }, [loggedIn])
+
+  /*
   useEffect(() => {
     const token = localStorage.getItem('token');
     api
@@ -62,6 +98,7 @@ function App() {
           .catch();
     }
   }, [loggedIn, navigate]);
+  */
   /*
   useEffect(() => {
     const token = localStorage.getItem('token');
