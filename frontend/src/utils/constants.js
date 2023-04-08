@@ -9,6 +9,5 @@ export const apiConfig = {
   baseUrl: 'https://api.hypnogit.nomoredomains.monster',
   headers: {
     'Content-Type': 'application/json',
-    "Authorization": `Bearer ${localStorage.getItem('token')}`,
   }
 };

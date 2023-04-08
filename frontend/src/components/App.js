@@ -251,6 +251,8 @@ function App() {
 
   const handleLogout = function () {
     localStorage.removeItem('token');
+    api
+      .setToken(null);
     setLoggedIn(false);
   }
 
