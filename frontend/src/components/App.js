@@ -35,49 +35,10 @@ function App() {
 
   const [isFail, setIsFail] = useState(false);
 
-  
-  const checkToken = useCallback(() => {
-    const token = localStorage.getItem('token');
-    api
-      .setToken(token);
-    if (token) {
-      api.getUserInfo()
-        .then((res) => {
-          setEmail(res.email);
-          setCurrentUser(res);
-          setLoggedIn(true);
-          navigate('/');
-        })
-        .catch();
-      }
-  }, [navigate]);
 
-  useEffect(() => {
-    checkToken();
-  }, []);
-
-  useEffect(() => {
-    api
-      .getInitialCards()
-        .then((initialCards) => {
-          setCards(initialCards);
-        })
-        .catch();
-  }, [loggedIn])
-
-  /*
   useEffect(() => {
     const token = localStorage.getItem('token');
-    api
-      .setToken(token);
     if (token) {
-      checkTokenValidity(token)
-        .then((res) => {
-          setLoggedIn(true);
-          setEmail(res.email);
-          navigate('/');
-        })
-        .catch();
       api
         .getInitialCards()
           .then((initialCards) => {
@@ -91,55 +52,23 @@ function App() {
           })
           .catch();
     }
-  }, [loggedIn, navigate]);
-  */
-  /*
+  }, [loggedIn]);
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
       checkTokenValidity(token)
-      .then((res) => {
-        setLoggedIn(true);
-        setEmail(res.email);
-        navigate('/');
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-    }
-  }, [navigate]);
-
-  useEffect(() => {
-    if (loggedIn) {
-      api
-        .getInitialCards()
-        .then((initialCards) => {
-          setCards(initialCards);
+        .then((res) => {
+          setEmail(res.email);
+          setLoggedIn(true);
+          navigate('/');
         })
-        .catch();
-      api
-        .getUserInfo()
-        .then((userInfo) => {
-          setCurrentUser(userInfo);
-        })
-        .catch();
-    }
-  }, [loggedIn]);
-  /*
-
-  /*
-  useEffect(() => {
-    if (loggedIn) {
-      api
-        .getUserInfo()
-        .then((userInfo) => {
-          setCurrentUser(userInfo);
-        })
-        .catch();
-    }
-  }, [loggedIn]);
-  */
-
+        .catch(() => {
+          localStorage.removeItem('token')
+        });
+      }
+  }, [navigate])
+ 
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
